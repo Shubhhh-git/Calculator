@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+        }
+
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: white;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        label {
+            color: white;
+            font-size: 16px;
+            width: 110px;
+        }
+
+        input {
+            padding: 12px;
+            width: 220px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 8px #00d4ff;
+        }
+
+        button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00b4d8;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0077b6;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .result {
+            color: #00ffab;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            input {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <h1>Calculator</h1>
+
+        <div class="input-group">
+            <label for="inputOne">First input</label>
+            <input type="number" placeholder="Enter number 1" id="inputOne">
+        </div>
+
+        <div class="input-group">
+            <label for="inputTwo">Second input</label>
+            <input type="number" placeholder="Enter number 2" id="inputTwo">
+        </div>
+
+        <div>
+            <button onclick="operation = '+'">+</button>
+            <button onclick="operation = '-'">-</button>
+            <button onclick="operation = '*'">*</button>
+            <button onclick="operation = '/'">/</button>
+        </div>
+
+        <div>
+            <button onclick="calculate()">Calculate</button>
+        </div>
+
+        <h3 class="result" id="result">Result:</h3>
+
+    </div>
+
+    <script>
+
+        let operation = "";
+
+        function calculate() {
+
+            let a = Number(document.getElementById("inputOne").value);
+            let b = Number(document.getElementById("inputTwo").value);
+
+            let result;
+
+            if (document.getElementById("inputOne").value === "" ||
+                document.getElementById("inputTwo").value === "") {
+
+                document.getElementById("result").innerText = "Please enter both numbers";
+                return;
+            }
+
+            if (operation === "+") {
+                result = a + b;
+            }
+            else if (operation === "-") {
+                result = a - b;
+            }
+            else if (operation === "*") {
+                result = a * b;
+            }
+            else if (operation === "/") {
+
+                if (b === 0) {
+                    document.getElementById("result").innerText = "Cannot divide by zero";
+                    return;
+                }
+
+                result = a / b;
+            }
+            else {
+                document.getElementById("result").innerText = "Select an operation first";
+                return;
+            }
+
+            document.getElementById("result").innerText = "Result: " + result;
+
+        }
+
+    </script>
+
+</body>
+</html>

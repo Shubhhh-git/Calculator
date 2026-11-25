@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-top: 20px;
+        }
+
+        li {
+            list-style: none;
+            background-color: #e2e8f0;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 5px;
+        }
+
+        li h3 {
+            margin-bottom: 8px;
+        }
+
+        li p {
+            margin-bottom: 8px;
+        }
+
+        li button {
+            padding: 7px 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>To Do List</h1>
+
+        <input type="text" id="taskInput" placeholder="Enter task name">
+
+        <textarea id="description" placeholder="Enter description"></textarea>
+
+        <input type="date" id="taskDate">
+
+        <button class="add-btn" onclick="addTask()">Add Task</button>
+
+        <ul id="taskList"></ul>
+
+    </div>
+
+    <script>
+
+        function addTask() {
+
+            let task = document.getElementById("taskInput").value;
+            let desc = document.getElementById("description").value;
+            let date = document.getElementById("taskDate").value;
+
+            if (task === "" || desc === "" || date === "") {
+                alert("Please fill all the fields");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            let h3 = document.createElement("h3");
+            h3.innerText = task;
+
+            let p = document.createElement("p");
+            p.innerText = desc;
+
+            let datePara = document.createElement("p");
+            datePara.innerText = "Deadline: " + date;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete";
+
+            deleteBtn.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(h3);
+            li.appendChild(p);
+            li.appendChild(datePara);
+            li.appendChild(deleteBtn);
+
+            document.getElementById("taskList").appendChild(li);
+
+            document.getElementById("taskInput").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("taskDate").value = "";
+
+        }
+
+    </script>
+
+</body>
+</html>
